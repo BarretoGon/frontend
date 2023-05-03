@@ -1,0 +1,201 @@
+
+<div class="container">
+  <h2>Experiencia  
+         <button (click)="vaciarForm()"  *ngIf="userLogged|async as user" class = "btn btn-primary rounded-circle" data-aos="flip-left" data-aos-delay="100" data-bs-toggle="modal" data-bs-target="#Agregarexp">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-circle-fill" viewBox="0 0 16 20">
+                          <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3v-3z"/>
+                          </svg> 
+         </button>
+     </h2>
+  <div class="card-body ">
+    <table class="table table-hover text-dark table-sm table-responsive">
+        <tbody *ngFor="let expe of Experiencia;">
+            <tr class="text-start" data-aos="fade-right" data-aos-offset="200" data-aos-easing="ease-in-sine">
+                <td>
+                    <div class="card-body">
+                        <div class="row align-items-center g-3">
+                            
+                            <div class="col-md-9">
+                                <h5>{{expe.nombre}}</h5>
+                                <p>{{expe.descripcion}}</p>
+                                <p><small class="text-muted">{{expe.periodo_inicio}} - {{expe.periodo_fin}}</small></p>
+                            </div>
+                        </div>
+                     </div>
+                 </td>
+                  <td>
+                                  <button (click)="GetEdit(expe.id)"  *ngIf="userLogged|async as user" class = "btn btn-outline-success rounded-circle"  data-bs-toggle="modal" data-bs-target="#Editarexp" > 
+                                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-fill" viewBox="0 0 16 20">
+                                      <path d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708l-3-3zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207l6.5-6.5zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.499.499 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11l.178-.178z"/>
+                                      </svg> 
+                                  </button>
+                                  &nbsp;
+                                  <button (click)="GetEdit(expe.id)" class = "btn btn-outline-danger rounded-circle"  *ngIf="userLogged|async as user" data-bs-toggle="modal" data-bs-target="#Eliminarexp">
+                                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 20">
+                                          <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z"/>
+                                      </svg>
+                                  </button>
+                              </td>
+             </tr>
+             <!-- Modal [disabled]="!this.form.valid" (click)="GetEdit(expe.id)"-->
+             
+             <div class="modal fade"  id="Editarexp" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="staticBackdropLabel">Editar</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <form [formGroup]="formexp" (ngSubmit)="Editarexp()" novalidate>
+                                
+                                <input type="hidden" formControlName="id" class="form-control" >
+                                
+                               
+
+                                <div class="mb-3">
+                                    <label for="validationDefault01">Nombre:</label>
+                                    <input type="text" formControlName="nombre" class="form-control" id="validationDefault01" placeholder="Nombre"  
+                                    [ngClass]="{'is-valid': !this.formexp.get('nombre')?.invalid , 'is-invalid': this.formexp.get('nombre')?.invalid}" required>
+                                    <div *ngIf="this.formexp.get('nombre')?.errors?.['required'] && this.formexp.get('nombre')?.touched" class="invalid-feedback">
+                                        Este campo es obligatorio!
+                                    </div>  
+                                </div>
+                
+                                <div class="mb-3">
+                                    <label for="validationDefault02">Descripcion:</label>
+                                    <input type="text" formControlName="descripcion" class="form-control" id="validationDefault02" placeholder="Descripcion" 
+                                    [ngClass]="{'is-valid': !this.formexp.get('descripcion')?.invalid , 'is-invalid': this.formexp.get('descripcion')?.invalid}" required>
+                                    <div *ngIf="this.formexp.get('descripcion')?.errors?.['required'] && this.formexp.get('descripcion')?.touched" class="invalid-feedback">
+                                        Este campo es obligatorio!
+                                    </div>  
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="validationDefault03">Año de inicio:</label>
+                                    <input type="number" formControlName="periodo_inicio" class="form-control" id="validationDefault03" placeholder="Periodo de Inicio"  
+                                    [ngClass]="{'is-valid': !this.formexp.get('periodo_inicio')?.invalid , 'is-invalid': this.formexp.get('periodo_inicio')?.invalid}" required>
+                                    <div *ngIf="this.formexp.get('periodo_inicio')?.errors?.['required'] && this.formexp.get('periodo_inicio')?.touched" class="invalid-feedback">
+                                        Este campo es obligatorio!
+                                    </div>  
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="exampleFormControl">Año de finalizacion:</label>
+                                    <input type="number" class="form-control" formControlName="periodo_fin" id="exampleFormControl"  placeholder="periodo_fin"  
+                                    [ngClass]="{'is-valid': !this.formexp.get('periodo_fin')?.invalid , 'is-invalid': this.formexp.get('periodo_fin')?.invalid}" required>
+                                    <div *ngIf="this.formexp.get('periodo_fin')?.errors?.['required'] && this.formexp.get('periodo_fin')?.touched" class="invalid-feedback">
+                                        Este campo es obligatorio!
+                                    </div>  
+                                </div>
+
+                                <div class="modal-footer">
+                                    <button type="submit" [disabled]="!this.formexp.valid" class="btn btn-warning" ><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-fill" viewBox="0 0 16 20">
+                                        <path d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708l-3-3zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207l6.5-6.5zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.499.499 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11l.178-.178z"/>
+                                        </svg> Editar
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+         </tbody>     
+         </table>
+     </div>
+    </div>
+
+
+
+
+<!-- Modal agregar-->
+<div class="modal fade"  id="Agregarexp" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="agregar" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="agregar">Agregar</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form [formGroup]="formexp" (ngSubmit)="Agregarexp($event)" novalidate>
+                                                
+                          
+
+                        <div class="mb-3">
+                            <label for="validationDefault01">Nombre:</label>
+                            <input type="text" formControlName="nombre" class="form-control" id="validationDefault01" placeholder="Nombre"  
+                            [ngClass]="{'is-valid': !this.formexp.get('nombre')?.invalid , 'is-invalid': this.formexp.get('nombre')?.invalid}" required>
+                            <div *ngIf="this.formexp.get('nombre')?.errors?.['required'] && this.formexp.get('nombre')?.touched" class="invalid-feedback">
+                                Este campo es obligatorio!
+                            </div>  
+                        </div>
+        
+                        <div class="mb-3">
+                            <label for="validationDefault02">Descripcion:</label>
+                            <input type="text" formControlName="descripcion" class="form-control" id="validationDefault02" placeholder="Descripcion" 
+                            [ngClass]="{'is-valid': !this.formexp.get('descripcion')?.invalid , 'is-invalid': this.formexp.get('descripcion')?.invalid}" required>
+                            <div *ngIf="this.formexp.get('descripcion')?.errors?.['required'] && this.formexp.get('descripcion')?.touched" class="invalid-feedback">
+                                Este campo es obligatorio!
+                            </div>  
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="validationDefault03">Año de inicio:</label>
+                            <input type="number" formControlName="periodo_inicio" class="form-control" id="validationDefault03" placeholder="Año de Inicio"  
+                            [ngClass]="{'is-valid': !this.formexp.get('periodo_inicio')?.invalid , 'is-invalid': this.formexp.get('periodo_inicio')?.invalid}" required>
+                            <div *ngIf="this.formexp.get('periodo_inicio')?.errors?.['required'] && this.formexp.get('periodo_inicio')?.touched" class="invalid-feedback">
+                                Este campo es obligatorio!
+                            </div>  
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="exampleFormControl">Año de finalizacion:</label>
+                            <input type="number" class="form-control" formControlName="periodo_fin" id="exampleFormControl"  placeholder="Año de finalizacion"  
+                            [ngClass]="{'is-valid': !this.formexp.get('periodo_fin')?.invalid , 'is-invalid': this.formexp.get('periodo_fin')?.invalid}" required>
+                            <div *ngIf="this.formexp.get('periodo_fin')?.errors?.['required'] && this.formexp.get('periodo_fin')?.touched" class="invalid-feedback">
+                                Este campo es obligatorio!
+                            </div>  
+                        </div>   
+
+                        <div class="modal-footer">
+                            <button type="submit" [disabled]="!this.formexp.valid" class="btn btn-primary" > 
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-circle-fill" viewBox="0 0 16 20">
+                                    <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3v-3z"/>
+                                </svg> 
+                                Nuevo
+                            </button>
+                        </div>               
+                    </form>   
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Elimianar-->
+    <div class="modal fade"  id="Eliminarexp" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Esta seguro de que desea eliminar este campo?</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                    <form [formGroup]="formexp" (ngSubmit)="Eliminarexp()" novalidate>
+                        
+                        <input type="hidden" formControlName="id" class="form-control">
+                        
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-danger" > 
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 20">
+                                    <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z"/>
+                                </svg>
+                                Eliminar
+                            </button>
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        
+  
+

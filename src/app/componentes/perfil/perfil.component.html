@@ -1,0 +1,169 @@
+<div class="container">
+    <div class="row">
+        <div class="col-12 mt-3">
+            <div class="card">
+                <div class="card-horizontal">
+                    <div class="img-square-wrapper">
+                        <img class="" [src]="perfil[0].url_foto" alt="Card image cap" style="width: 11rem;">
+                        
+                    </div>
+                    <div class="card-body">
+                        <h4 class="card-title">{{perfil[0].nombre}} {{perfil[0].apellido}}</h4>
+                        <h4 class="card-title">{{perfil[0].edad}}</h4>     
+                        <p class="card-text">{{perfil[0].fechaNac}}</p>                 
+                        <h5 class="card-text">{{perfil[0].titulo}}</h5>
+                        <p class="card-text">{{perfil[0].sobre_mi}}</p>
+                    
+
+                    </div>
+
+                    <div class="col-md-4">
+                        <h6>Correo: </h6>
+                        <p class="card-text">{{perfil[0].correo}}</p>
+                        <h6>Telefono: </h6>
+                        <p class="card-text">{{perfil[0].telefono}}</p>
+                        <h6>Domicilio: </h6>
+                        <p class="card-text">{{perfil[0].domicilio}}</p>
+                     </div>
+                        <div class="">
+                    
+                            <button  class="btn btn-sm btn-outline-success" 
+                                data-bs-toggle="modal" data-bs-target="#Editar" *ngIf="userLogged|async as user"  ><svg
+                                    xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                    class="bi bi-pencil-fill" viewBox="0 0 16 20">
+                                    <path
+                                        d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708l-3-3zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207l6.5-6.5zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.499.499 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11l.178-.178z" />
+                                </svg></button>
+
+
+                                
+                            
+                       
+                        </div>
+                    
+
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</div>
+
+ <!-- Modal -->
+ <div class="modal fade" id="Editar" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="staticBackdropLabel">Editar</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form [formGroup]="form" (ngSubmit)="Editar()" novalidate>
+                    
+                    <input type="hidden" formControlName="id" class="form-control" ngModel={{perfil[0].id}}>
+                    
+                    <div class="mb-3">
+                        <label for="validationDefault00">Img:</label>
+                        <input type="text" formControlName="url_foto" class="form-control" id="validationDefault00" placeholder="URL"  
+                        [ngClass]="{'is-valid': !this.form.get('url_foto')?.invalid , 'is-invalid': this.form.get('url_foto')?.invalid}" ngModel={{perfil[0].url_foto}} required/>
+                        <div *ngIf="this.form.get('url_foto')?.errors?.['required'] && this.form.get('url_foto')?.touched" class="invalid-feedback">
+                            Este campo es obligatorio!
+                        </div>    
+                    </div>     
+
+                    <div class="mb-3">
+                        <label for="validationDefault01">Nombre:</label>
+                        <input type="text" formControlName="nombre" class="form-control" id="validationDefault01" placeholder="Nombre"  
+                        [ngClass]="{'is-valid': !this.form.get('nombre')?.invalid , 'is-invalid': this.form.get('nombre')?.invalid}" ngModel={{perfil[0].nombre}} required>
+                        <div *ngIf="this.form.get('nombre')?.errors?.['required'] && this.form.get('nombre')?.touched" class="invalid-feedback">
+                            Este campo es obligatorio!
+                        </div>  
+                    </div>
+    
+                    <div class="mb-3">
+                        <label for="validationDefault02">Apellido:</label>
+                        <input type="text" formControlName="apellido" class="form-control" id="validationDefault02" placeholder="Apelido" 
+                        [ngClass]="{'is-valid': !this.form.get('apellido')?.invalid , 'is-invalid': this.form.get('apellido')?.invalid}" ngModel={{perfil[0].apellido}} required>
+                        <div *ngIf="this.form.get('apellido')?.errors?.['required'] && this.form.get('apellido')?.touched" class="invalid-feedback">
+                            Este campo es obligatorio!
+                        </div>  
+                    </div>
+
+                    
+
+                    <div class="mb-3">
+                        <label for="validationDefault03">Titulo:</label>
+                        <input type="text" formControlName="titulo" class="form-control" id="validationDefault03" placeholder="Titulo"  
+                        [ngClass]="{'is-valid': !this.form.get('titulo')?.invalid , 'is-invalid': this.form.get('titulo')?.invalid}" ngModel={{perfil[0].titulo}} required>
+                        <div *ngIf="this.form.get('titulo')?.errors?.['required'] && this.form.get('titulo')?.touched" class="invalid-feedback">
+                            Este campo es obligatorio!
+                        </div>  
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="exampleFormControlTextarea1">Informacion profecional resumida sobre vos:</label>
+                        <textarea class="form-control" formControlName="sobre_mi" id="exampleFormControlTextarea1"  placeholder="sobre_mi"  
+                        [ngClass]="{'is-valid': !this.form.get('sobre_mi')?.invalid , 'is-invalid': this.form.get('sobre_mi')?.invalid}" ngModel={{perfil[0].sobre_mi}} required></textarea>
+                        <div *ngIf="this.form.get('sobre_mi')?.errors?.['required'] && this.form.get('sobre_mi')?.touched" class="invalid-feedback">
+                            Este campo es obligatorio!
+                        </div>  
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="validationDefault04">Correo:</label>
+                        <input type="text" formControlName="correo" class="form-control" id="validationDefault04" placeholder="Correo"  
+                        [ngClass]="{'is-valid': !this.form.get('correo')?.invalid , 'is-invalid': this.form.get('correo')?.invalid}" ngModel={{perfil[0].correo}} required>
+                        <div *ngIf="this.form.get('correo')?.errors?.['required'] && this.form.get('correo')?.touched" class="invalid-feedback">
+                            Este campo es obligatorio!
+                        </div>  
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="validationDefault05">Telefono:</label>
+                        <input type="text" formControlName="telefono" class="form-control" id="validationDefault05" placeholder="telefono"  
+                        [ngClass]="{'is-valid': !this.form.get('telefono')?.invalid , 'is-invalid': this.form.get('telefono')?.invalid}" ngModel={{perfil[0].telefono}} required>
+                        <div *ngIf="this.form.get('telefono')?.errors?.['required'] && this.form.get('telefono')?.touched" class="invalid-feedback">
+                            Este campo es obligatorio!
+                        </div>  
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="validationDefault06">Domicilio:</label>
+                        <input type="text" formControlName="domicilio" class="form-control" id="validationDefault06" placeholder="domicilio"  
+                        [ngClass]="{'is-valid': !this.form.get('domicilio')?.invalid , 'is-invalid': this.form.get('domicilio')?.invalid}" ngModel={{perfil[0].domicilio}} required>
+                        <div *ngIf="this.form.get('domicilio')?.errors?.['required'] && this.form.get('domicilio')?.touched" class="invalid-feedback">
+                            Este campo es obligatorio!
+                        </div>  
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="validationDefault07">Edad:</label>
+                        <input type="text" formControlName="edad" class="form-control" id="validationDefault07" placeholder="edad"  
+                        [ngClass]="{'is-valid': !this.form.get('edad')?.invalid , 'is-invalid': this.form.get('edad')?.invalid}" ngModel={{perfil[0].edad}} required>
+                        <div *ngIf="this.form.get('edad')?.errors?.['required'] && this.form.get('edad')?.touched" class="invalid-feedback">
+                            Este campo es obligatorio!
+                        </div>  
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="validationDefault08">Fecha de nacimiento:</label>
+                        <input type="text" formControlName="fechaNac" class="form-control" id="validationDefault08" placeholder="fechaNac"  
+                        [ngClass]="{'is-valid': !this.form.get('fechaNac')?.invalid , 'is-invalid': this.form.get('fechaNac')?.invalid}" ngModel={{perfil[0].fechaNac}} required>
+                        <div *ngIf="this.form.get('fechaNac')?.errors?.['required'] && this.form.get('fechaNac')?.touched" class="invalid-feedback">
+                            Este campo es obligatorio!
+                        </div>  
+                    </div>
+
+
+
+                    <div class="modal-footer">
+                     <button type="submit" class="btn btn-warning">Editar</button>
+                        
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
