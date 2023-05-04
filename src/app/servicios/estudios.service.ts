@@ -9,7 +9,7 @@ import { estudio } from '../models/estudio';
 })
 export class EstudioService {
 
-  URL = 'http://localhost:8080/estudios/';
+  URL = 'https://backend-4f2f.onrender.com/estudios/';
   constructor(private http: HttpClient) { }
 
   public getEstudio(): Observable<any>{

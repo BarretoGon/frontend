@@ -11,7 +11,7 @@ export class PortfolioService {
 
   constructor(private http:HttpClient, private afauth: AngularFireAuth) { }
 
-    url="http://localhost:8080/personas/";
+    url="https://backend-4f2f.onrender.com/personas/";
 
     obtenerDatos():Observable<any>{
 
