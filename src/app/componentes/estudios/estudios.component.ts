@@ -2,8 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/servicios/auth.service';
-import { getAuth } from 'firebase/auth';
-//import { getAuth } from 'firebase/auth';
+
 import { EstudioService} from 'src/app/servicios/estudios.service';
 
 
@@ -18,9 +17,7 @@ export class EstudiosComponent  implements OnInit{
   agregarEstudio:any;
   EstudioById:any;
   formEstudio:FormGroup;
- // editarEst: string;
- // eliminarEst: string;
- // agregarEst: string;
+
   
   constructor(public estudioService : EstudioService, private router:Router, private formBuilder: FormBuilder, private authService:AuthService ){
 

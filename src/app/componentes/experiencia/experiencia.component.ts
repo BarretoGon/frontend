@@ -4,10 +4,6 @@ import { Router } from '@angular/router';
 import { AuthService } from 'src/app/servicios/auth.service';
 import { ExperienciaService } from 'src/app/servicios/experiencia.service';
 
-//import { AuthService } from 'src/app/servicios/auth.service';
-//import { getAuth } from 'firebase/auth';
-//import * as AOS from 'aos';
-//import { getAuth } from 'firebase/auth';
 
 @Component({
   selector: 'app-experiencia',
@@ -19,7 +15,7 @@ export class ExperienciaComponent implements OnInit{
   educacionList:any;
 
   formexp:FormGroup;
-  Experiencia:any;
+  Experiencia:any=[];
   edit:any;
   agregar:any;
   ExperienciaById:any;

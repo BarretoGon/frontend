@@ -2,8 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/servicios/auth.service';
-//import { NgbProgressbarConfig } from '@ng-bootstrap/ng-bootstrap';
-//import { getAuth } from 'firebase/auth';
+
 import { HabilidadService } from 'src/app/servicios/habilidades.service';
 
 

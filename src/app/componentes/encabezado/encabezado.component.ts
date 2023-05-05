@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/servicios/auth.service';
-import { getAuth } from 'firebase/auth';
-import { PortfolioService } from 'src/app/servicios/portfolio.service';
-//import { PortfolioService } from 'src/app/servicios/portfolio.service';
+
+
 
 @Component({
   selector: 'app-encabezado',

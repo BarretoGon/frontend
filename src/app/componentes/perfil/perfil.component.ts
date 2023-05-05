@@ -2,8 +2,8 @@ import { Component, OnInit} from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { PortfolioService } from 'src/app/servicios/portfolio.service';
 
-//import { AuthService } from 'src/app/servicios/auth.service';
-import { getAuth } from 'firebase/auth';
+
+
 import { AuthService } from 'src/app/servicios/auth.service';
 
 @Component({
@@ -93,15 +93,7 @@ export class PerfilComponent implements OnInit{
       
    userLogged=this.authService.getUserLogged();
     
-   /*
-spring.jpa.hibernate.ddl-auto=update
-spring.datasource.url = jdbc:mysql://localhost:3306/portfolio?useSSL=false&serverTimezone=UTC
-spring.datasource.username=root
-spring.datasource.password=
-spring.jpa.database-platform=org.hibernate.dialect.MySQL8Dialect
-
-
-   */
+  
 
 
 }

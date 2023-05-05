@@ -5,9 +5,10 @@ import { PortfolioComponent } from './componentes/portfolio/portfolio.component'
 import { LoginComponent } from './componentes/login/login.component';
 
 const routes: Routes = [
+  {path:'',redirectTo:'portfolio',pathMatch:'full'},
   {path:'portfolio',component:PortfolioComponent},
-  {path:'login',component:LoginComponent},
-  {path:'',redirectTo:'portfolio',pathMatch:'full'}
+  {path:'login',component:LoginComponent}
+ 
 ];
 
 @NgModule({
